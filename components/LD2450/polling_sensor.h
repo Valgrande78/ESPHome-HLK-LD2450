@@ -15,18 +15,18 @@ namespace esphome::ld2450
         void setup() override
         {
             // Determine unit conversion
-            if (unit_of_measurement_ != nullptr)
+            if (get_unit_of_measurement() != nullptr)
             {
-                if (strcmp(unit_of_measurement_, "m") == 0)
+                if (strcmp(get_unit_of_measurement(), "m") == 0)
                     conversion_factor_ = 0.001f;
-                else if ((strcmp(unit_of_measurement_, "cm") == 0))
+                else if (strcmp(get_unit_of_measurement(), "cm") == 0)
                     conversion_factor_ = 0.1f;
-            }
+            } 
         }
 
         void update() override
         {
-            if (raw_state != value_ && !(std::isnan(raw_state) && std::isnan(value_)))
+            if (get_raw_state() != value_ && !(std::isnan(get_raw_state()) && std::isnan(value_)))
                 publish_state(value_);
         }
 
